@@ -1,5 +1,9 @@
-before_install:
-  - sudo apt-get install -qq rpm
+sudo: false
+
+addons:
+  apt:
+    packages:
+    - rpm
 
 install:
   - gem install package_cloud fpm
