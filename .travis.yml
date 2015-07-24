@@ -18,11 +18,13 @@ rvm:
 script:
   - curl -s https://raw.githubusercontent.com/visibilityspots/ci-scripts/master/puppet/puppet-lintian-validation.sh | bash -s jetty
   - lint_state=$?
+  - echo $lint_state
   - curl -s https://raw.githubusercontent.com/visibilityspots/ci-scripts/master/puppet/puppet-syntax-validation.sh | bash -s jetty
   - syntax_state=$?
+  - echo $syntax_state
   - curl -s https://raw.githubusercontent.com/visibilityspots/ci-scripts/master/puppet/remove-previous-package.sh | bash -s $lint_state $syntax_state
-  - curl -s https://raw.githubusercontent.com/visibilityspots/ci-scripts/master/puppet/package-puppet-module.sh | bash -s jetty development $lint_state $syntax_state
-  - curl -s https://raw.githubusercontent.com/visibilityspots/ci-scripts/master/puppet/push-package.sh | bash -s $lint_state $syntax_state
+    #  - curl -s https://raw.githubusercontent.com/visibilityspots/ci-scripts/master/puppet/package-puppet-module.sh | bash -s jetty development $lint_state $syntax_state
+    #  - curl -s https://raw.githubusercontent.com/visibilityspots/ci-scripts/master/puppet/push-package.sh | bash -s $lint_state $syntax_state
 
 notifications:
   email:
