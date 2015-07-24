@@ -16,10 +16,7 @@ rvm:
   - 1.9.3
 
 script:
-  - curl -s https://raw.githubusercontent.com/visibilityspots/ci-scripts/master/travis/puppet-module.sh | bash -s jetty
-    #  - curl -s https://raw.githubusercontent.com/visibilityspots/ci-scripts/master/puppet/remove-previous-package.sh | bash -s $lint_state $syntax_state
-    #  - curl -s https://raw.githubusercontent.com/visibilityspots/ci-scripts/master/puppet/package-puppet-module.sh | bash -s jetty development $lint_state $syntax_state
-    #  - curl -s https://raw.githubusercontent.com/visibilityspots/ci-scripts/master/puppet/push-package.sh | bash -s $lint_state $syntax_state
+  - curl -s https://raw.githubusercontent.com/visibilityspots/ci-scripts/master/travis/puppet-module.sh | bash -s jetty development
 
 notifications:
   email:
