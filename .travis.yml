@@ -20,9 +20,9 @@ script:
   - lint_state=$?
   - curl -s https://raw.githubusercontent.com/visibilityspots/ci-scripts/master/puppet/puppet-syntax-validation.sh | bash -s jetty
   - syntax_state=$?
-  - if [ $lint_state -eq 0 ] && [ $syntax_state -eq 0 ]; then curl -s https://raw.githubusercontent.com/visibilityspots/ci-scripts/master/puppet/remove-previous-package.sh | bash -s; fi
-  - if [ $lint_state -eq 0 ] && [ $syntax_state -eq 0 ]; then curl -s https://raw.githubusercontent.com/visibilityspots/ci-scripts/master/puppet/package-puppet-module.sh | bash -s jetty development; fi
-  - if [ $lint_state -eq 0 ] && [ $syntax_state -eq 0 ]; then bundle exec package_cloud push visibilityspots/puppet-development-modules/el/6 *.rpm; fi
+  - if [ $lint_state -eq 0 ] && [ $syntax_state -eq 0 ] && [ "${TRAVIS_PULL_REQUEST}" == "false" ]; then curl -s https://raw.githubusercontent.com/visibilityspots/ci-scripts/master/puppet/remove-previous-package.sh | bash -s; else echo 'Lint/syntax checks failed or it consist of a pull request so no package stuff will be performed'; fi
+  - if [ $lint_state -eq 0 ] && [ $syntax_state -eq 0 ] && [ "${TRAVIS_PULL_REQUEST}" == "false" ]; then curl -s https://raw.githubusercontent.com/visibilityspots/ci-scripts/master/puppet/package-puppet-module.sh | bash -s jetty development; else echo 'Lint/syntax checks failed or it consist of a pull request so no package stuff will be performed'; fi
+  - if [ $lint_state -eq 0 ] && [ $syntax_state -eq 0 ] && [ ${TRAVIS_PULL_REQUEST}" != "false" ]; then bundle exec package_cloud push visibilityspots/puppet-development-modules/el/6 *.rpm; else echo 'Lint/syntax checks failed or it consist of a pull request so no package stuff will be performed'; fi
 
 notifications:
   email:
