@@ -3,6 +3,7 @@
 # Initialization class for the jetty service
 class jetty (
   $pkg_name     = $jetty::params::pkg_name,
+  $java_options = $jetty::params::java_options,
 ) inherits jetty::params {
 
   include jetty::install
