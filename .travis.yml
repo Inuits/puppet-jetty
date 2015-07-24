@@ -15,12 +15,9 @@ addons:
 rvm:
   - 1.9.3
 
-env:
-  - PUPPET_VERSION=3.8.1
-
 script:
-  - bundle exec puppet-lint jetty/manifests
-  - for i in $(find manifests/ -iname *.pp); do bundle exec puppet parser validate --storeconfigs $i; done
+  - curl -s https://raw.githubusercontent.com/visibilityspots/ci-scripts/master/puppet/puppet-lintian-validation.sh | bash -s jetty
+  - curl -s https://raw.githubusercontent.com/visibilityspots/ci-scripts/master/puppet/puppet-syntax-validation.sh | bash -s jetty
   - curl -s https://raw.githubusercontent.com/visibilityspots/ci-scripts/master/puppet/remove-previous-package.sh | bash -s
   - curl -s https://raw.githubusercontent.com/visibilityspots/ci-scripts/master/puppet/package-puppet-module.sh | bash -s jetty development
   - bundle exec package_cloud push visibilityspots/puppet-development-modules/el/6 *.rpm
