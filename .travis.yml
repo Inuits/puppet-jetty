@@ -1,18 +1,19 @@
 sudo: false
 
+cache:
+  - apt
+  - bundler
+
 addons:
   apt:
     packages:
     - rpm
 
-install:
-  - gem install package_cloud fpm
-
 rvm:
   - 1.9.3
 
 env:
-  - PUPPET_VERSION=3.7.5
+  - PUPPET_VERSION=3.8.1
 
 script:
   - curl -s https://raw.githubusercontent.com/visibilityspots/ci-scripts/master/puppet/remove-previous-package.sh | bash -s
