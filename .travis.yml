@@ -1,5 +1,8 @@
 sudo: false
 
+before_install:
+  - git clone --depth=50 --branch=master git://github.com/visibilityspots/puppet-jetty.git visibilityspots/jetty
+
 cache:
   - apt
   - bundler
