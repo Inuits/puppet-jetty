@@ -20,12 +20,9 @@ script:
   - lint_state=$?
   - curl -s https://raw.githubusercontent.com/visibilityspots/ci-scripts/master/puppet/puppet-syntax-validation.sh | bash -s jetty
   - syntax_state=$?
-  - echo $lint_state
-  - echo $syntax_state
-
-    #  - curl -s https://raw.githubusercontent.com/visibilityspots/ci-scripts/master/puppet/remove-previous-package.sh | bash -s
-    #  - curl -s https://raw.githubusercontent.com/visibilityspots/ci-scripts/master/puppet/package-puppet-module.sh | bash -s jetty development
-    #  - bundle exec package_cloud push visibilityspots/puppet-development-modules/el/6 *.rpm
+  - if [ $lint_state -eq 0 ] && [ $syntax_state -eq 0 ]; then curl -s https://raw.githubusercontent.com/visibilityspots/ci-scripts/master/puppet/remove-previous-package.sh | bash -s; fi
+  - if [ $lint_state -eq 0 ] && [ $syntax_state -eq 0 ]; then curl -s https://raw.githubusercontent.com/visibilityspots/ci-scripts/master/puppet/package-puppet-module.sh | bash -s jetty development; fi
+  - if [ $lint_state -eq 0 ] && [ $syntax_state -eq 0 ]; then bundle exec package_cloud push visibilityspots/puppet-development-modules/el/6 *.rpm; fi
 
 notifications:
   email:
