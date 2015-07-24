@@ -18,7 +18,7 @@ env:
 script:
   - curl -s https://raw.githubusercontent.com/visibilityspots/ci-scripts/master/puppet/remove-previous-package.sh | bash -s
   - curl -s https://raw.githubusercontent.com/visibilityspots/ci-scripts/master/puppet/package-puppet-module.sh | bash -s jetty development
-  - package_cloud push visibilityspots/puppet-development-modules/el/6 *.rpm
+  - bundle exec package_cloud push visibilityspots/puppet-development-modules/el/6 *.rpm
 
 notifications:
   email:
