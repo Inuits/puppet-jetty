@@ -2,15 +2,15 @@
 #
 # Class which configures the jetty service
 class jetty::config (
-  $jetty_user = 'jetty',
+  $jetty_user  = 'jetty',
   $jetty_group = 'jetty',
 ) {
 
-  group { ${jetty_group}:
+  group { "${jetty_group}":
     ensure => present,
   }
 
-  user { ${jetty_user}:
+  user { "${jetty_user}":
     ensure  => present,
     groups  => $jetty_group,
     require => Group[$jetty_group],
@@ -25,7 +25,7 @@ class jetty::config (
       owner   => $jetty_user,
       group   => $jetty_group,
       mode    => '0644',
-      require => User[$jetty_user],
+      require => User["$jetty_user"],
   }
 
   file { '/opt/jetty/logs':
