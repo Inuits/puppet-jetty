@@ -7,11 +7,11 @@ class jetty::config (
   $jetty_home  = '/opt/jetty',
 ) {
 
-  group { "${jetty_group}":
+  group { $jetty_group:
     ensure => present,
   }
 
-  user { "${jetty_user}":
+  user { $jetty_user:
     ensure  => present,
     groups  => $jetty_group,
     home    => $jetty_home,
@@ -27,7 +27,7 @@ class jetty::config (
       owner   => $jetty_user,
       group   => $jetty_group,
       mode    => '0644',
-      require => User["$jetty_user"],
+      require => User[$jetty_user],
   }
 
   file { '/opt/jetty/logs':
