@@ -4,6 +4,7 @@
 class jetty::config (
   $jetty_user  = 'jetty',
   $jetty_group = 'jetty',
+  $jetty_home  = '/opt/jetty',
 ) {
 
   group { "${jetty_group}":
@@ -13,6 +14,7 @@ class jetty::config (
   user { "${jetty_user}":
     ensure  => present,
     groups  => $jetty_group,
+    home    => $jetty_home,
     require => Group[$jetty_group],
   }
 
