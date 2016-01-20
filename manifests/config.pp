@@ -1,17 +1,33 @@
 # Class: jetty::config
 #
 # Class which configures the jetty service
-class jetty::config {
+class jetty::config (
+  $jetty_user  = 'jetty',
+  $jetty_group = 'jetty',
+  $jetty_home  = '/opt/jetty',
+) {
+
+  group { $jetty_group:
+    ensure => present,
+  }
+
+  user { $jetty_user:
+    ensure  => present,
+    groups  => $jetty_group,
+    home    => $jetty_home,
+    require => Group[$jetty_group],
+  }
 
   file { [
       '/var/log/jetty',
       '/var/lib/jetty',
       '/var/lib/jetty/webapps'
     ]:
-      ensure => 'directory',
-      owner  => 'jetty',
-      group  => 'jetty',
-      mode   => '0644'
+      ensure  => 'directory',
+      owner   => $jetty_user,
+      group   => $jetty_group,
+      mode    => '0644',
+      require => User[$jetty_user],
   }
 
   file { '/opt/jetty/logs':
