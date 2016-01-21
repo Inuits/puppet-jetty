@@ -44,7 +44,7 @@ class jetty::config (
 
   file { '/etc/init.d/jetty':
     ensure => present,
-    sourve => "${jetty_home}/bin/jetty.sh",
+    source => "${jetty_home}/bin/jetty.sh",
   }
 
   file { '/etc/default/jetty':
