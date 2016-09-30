@@ -19,6 +19,7 @@ class jetty::config (
   }
 
   file { [
+      '/opt/jetty',
       '/var/log/jetty',
       '/var/lib/jetty',
       '/var/lib/jetty/webapps'
@@ -42,8 +43,8 @@ class jetty::config (
   }
 
   file { '/etc/init.d/jetty':
-    ensure => 'link',
-    target => '/opt/jetty/bin/jetty.sh'
+    ensure => present,
+    source => "${jetty_home}/bin/jetty.sh",
   }
 
   file { '/etc/default/jetty':
