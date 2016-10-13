@@ -22,7 +22,7 @@ class jetty::config (
       '/opt/jetty',
       '/var/log/jetty',
       '/var/lib/jetty',
-      '/var/lib/jetty/tmp'
+      '/var/lib/jetty/tmp',
       '/var/lib/jetty/webapps'
     ]:
       ensure  => 'directory',
