@@ -1,6 +1,6 @@
-### File managed with puppet ### 
-## Served by:        '<%= scope.lookupvar('::servername') %>' 
-## Module:           '<%= scope.to_hash['module_name'] %>' 
+### File managed with puppet ###
+## Served by:        '<%= scope.lookupvar('::servername') %>'
+## Module:           '<%= scope.to_hash['module_name'] %>'
 ## Template source:  'MODULES<%= template_source.gsub(Regexp.new("^#{Puppet::Node::Environment.current[:modulepath].gsub(':','|')}"),"") %>'
 
 #
@@ -48,3 +48,5 @@ JETTY_ARGS="jetty.port=8888 jetty.spdy.port=8443 jetty.secure.port=443"
 JETTY_USER=jetty
 
 JETTY_LOGS=/var/log/jetty
+
+TMPDIR=/var/lib/jetty/tmp
