@@ -49,6 +49,7 @@ class jetty::config (
   }
 
   file { '/etc/default/jetty':
-    content => template('jetty/jetty.erb')
+    content => template('jetty/jetty.erb'),
+    notify  => Service['jetty'],
   }
 }
